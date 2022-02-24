@@ -8,16 +8,16 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 apt-get update
 
-export CMAKE_VERSION=3.15.2
+export CMAKE_VERSION=3.21.5
 export GOOGLETEST_VERSION=1.10.0
 
 cmake_install() {
     tmp_dir=$(mktemp -d)
     pushd $tmp_dir
-    wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-x86_64.sh
-    chmod +x cmake-${CMAKE_VERSION}-Linux-x86_64.sh
-    ./cmake-${CMAKE_VERSION}-Linux-x86_64.sh --prefix=/usr/local --skip-license
-    rm cmake-${CMAKE_VERSION}-Linux-x86_64.sh
+    wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-Linux-aarch64.sh
+    chmod +x cmake-${CMAKE_VERSION}-Linux-aarch64.sh
+    ./cmake-${CMAKE_VERSION}-Linux-aarch64.sh --prefix=/usr/local --skip-license
+    rm cmake-${CMAKE_VERSION}-Linux-aarch64.sh
     popd
 }
 
