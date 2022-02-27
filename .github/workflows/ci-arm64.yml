@@ -7,8 +7,8 @@ on:
     branches: [ main ]
 
 jobs:
-  cmake_test:
-    name: All test
+  cmake_test_C20:
+    name: C++20 test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -28,54 +28,358 @@ jobs:
         echo "  C++20 test " && \
         ./ci/do_ci.sh cmake.c++20.test && \
         ./ci/do_ci.sh cmake.c++20.stl.test && \
-        echo " cmake_otprotocol_test" && \
+        deactivate'
+  cmake_otprotocol_test:
+    name: otprotocol test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_cmake.sh && \
+        ./ci/setup_ci_environment.sh && \
         ./ci/setup_grpc.sh && \
         ./ci/do_ci.sh cmake.exporter.otprotocol.test && \
-        echo " plugin_test " && \
-        ./ci/do_ci.sh cmake.test_example_plugin && \
-        echo " bazel_test" && \
-        ./ci/setup_thrift.sh dependencies_only && \
+        deactivate'
+  cmake_plugin_test:
+    name: plugin test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
+        ./ci/do_ci.sh cmake.test_example_plugin && \
+        deactivate'
+  cmake_bazel_test:
+    name: bazel test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh dependencies_only && \
         ./ci/install_bazelisk.sh && \
         ./ci/do_ci.sh bazel.test && \
-        echo " Bazel with external abseil" && \
+        deactivate'
+  cmake_bazel_abseil_test:
+    name: bazel abseil test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh dependencies_only && \
+        ./ci/install_bazelisk.sh && \
         ./ci/do_ci.sh bazel.with_abseil && \
-        echo " Bazel valgrind" && \
+        deactivate'
+  cmake_bazel_valgrind_test:
+    name: bazel valgrind test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh dependencies_only && \
+        ./ci/install_bazelisk.sh && \
         ./ci/do_ci.sh bazel.valgrind && \
-        echo " Bazel noexcept" && \
+        deactivate'
+  cmake_bazel_noexcept_test:
+    name: bazel noexcept test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh dependencies_only && \
+        ./ci/install_bazelisk.sh && \
         ./ci/do_ci.sh bazel.noexcept && \
-        echo "Bazel asan config " && \
+        deactivate'
+  cmake_bazel_asan_config_test:
+    name: bazel asan config test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh dependencies_only && \
+        ./ci/install_bazelisk.sh && \
         ./ci/do_ci.sh bazel.asan && \
-        echo " Bazel tsan config" && \
+        deactivate'
+  cmake_bazel_tsan_config_test:
+    name: bazel tsan config test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh dependencies_only && \
+        ./ci/install_bazelisk.sh && \
         ./ci/do_ci.sh bazel.tsan && \
-        echo "Benchmark" && \
+        deactivate'
+  cmake_Benchmark_test:
+    name: Benchmark test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
+        ./ci/setup_ci_environment.sh && \
+         ./ci/install_bazelisk.sh && \
         export BENCHMARK_DIR=/benchmark && \
         ./ci/do_ci.sh benchmark && \
-        echo "Format " && \
+        deactivate'
+  cmake_format_test:
+    name: format test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \        
         ./ci/install_format_tools.sh && \
         ./ci/do_ci.sh format && \
-        echo " Code coverage" && \
+        deactivate'
+  cmake_coverage_test:
+    name: coverage test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
+        ./ci/setup_cmake.sh && \
+        ./ci/setup_ci_environment.sh && \
         ./ci/do_ci.sh code.coverage && \
-        echo " markdown-lint " && \
+        deactivate'
+  cmake_markdown-lint_test:
+    name: markdown-lint test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
         npm install -g markdownlint-cli && \
         markdownlint . && \
-        echo "misspell" && \
+        deactivate'
+  cmake_misspell_test:
+    name: misspell test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
         curl -L -o ./install-misspell.sh https://git.io/misspell && \
         sh ./install-misspell.sh && \
         ./bin/misspell -error . && \
-        echo " gcc 4.8 (without otlp exporter) " && \
+        deactivate'
+  cmake_gcc_test:
+    name: gcc test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
+        ./ci/setup_ci_environment.sh && \
         ./ci/install_gcc48.sh && \
         CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_cmake.sh && \
         export CC= /usr/bin/gcc-4.8 && \
         export CXX=/usr/bin/g++-4.8 && \
         ./ci/do_ci.sh cmake.legacy.test && \
-        echo " gcc 4.8 (with otlp exporter) " && \
-        CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_grpc.sh -v 4.8 && \
+        deactivate'
+  cmake_gcc_otlp_test:
+    name: gcc otlp test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
+        ./ci/setup_ci_environment.sh && \
+        ./ci/install_gcc48.sh && \
+        CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_cmake.sh && \
+        export CC= /usr/bin/gcc-4.8 && \
+        export CXX=/usr/bin/g++-4.8 && \
         ./ci/do_ci.sh cmake.legacy.exporter.otprotocol.test && \
-        echo " cmake tests (without otlp-exporter) " && \
+        deactivate'
+  cmake_otlp_exporter_test:
+    name: gcc otlp exporter test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
+        ./ci/setup_cmake.sh && \
+        ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh && \
         ./ci/do_ci.sh cmake.test && \
-        echo " cmake tests (enable abseil-cpp) " && \
+        deactivate'
+  cmake_absel_stl_test:
+    name: gcc absel stl test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        uname -m && \   
+        ./ci/setup_cmake.sh && \
+        ./ci/setup_ci_environment.sh && \
         ./ci/install_abseil.sh && \
         ./ci/do_ci.sh cmake.abseil.test && \
         deactivate'
