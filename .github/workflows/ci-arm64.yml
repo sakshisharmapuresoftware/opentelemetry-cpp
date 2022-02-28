@@ -21,7 +21,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \
         ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
@@ -43,7 +43,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
@@ -64,7 +64,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
@@ -84,7 +84,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh dependencies_only && \
@@ -105,7 +105,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh dependencies_only && \
@@ -126,7 +126,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh dependencies_only && \
@@ -147,7 +147,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh dependencies_only && \
@@ -168,7 +168,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh dependencies_only && \
@@ -189,7 +189,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
         ./ci/setup_thrift.sh dependencies_only && \
@@ -210,7 +210,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/setup_ci_environment.sh && \
          ./ci/install_bazelisk.sh && \
@@ -231,7 +231,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \        
         ./ci/install_format_tools.sh && \
         ./ci/do_ci.sh format && \
@@ -250,7 +250,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
@@ -270,7 +270,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         npm install -g markdownlint-cli && \
         markdownlint . && \
@@ -289,7 +289,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         curl -L -o ./install-misspell.sh https://git.io/misspell && \
         sh ./install-misspell.sh && \
@@ -309,7 +309,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         ./ci/setup_ci_environment.sh && \
         ./ci/install_gcc48.sh && \
@@ -332,7 +332,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         ./ci/setup_ci_environment.sh && \
         ./ci/install_gcc48.sh && \
@@ -355,7 +355,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
@@ -376,7 +376,7 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget npm && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \   
         ./ci/setup_cmake.sh && \
         ./ci/setup_ci_environment.sh && \
