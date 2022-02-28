@@ -81,13 +81,13 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget sudo && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-        ./ci/setup_thrift.sh dependencies_only && \
-        ./ci/install_bazelisk.sh && \
-        ./ci/do_ci.sh bazel.test'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/setup_thrift.sh dependencies_only && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo ./ci/do_ci.sh bazel.test'
   cmake_bazel_abseil_test:
     name: bazel abseil test
     runs-on: ubuntu-latest
@@ -102,13 +102,13 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget sudo && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-        ./ci/setup_thrift.sh dependencies_only && \
-        ./ci/install_bazelisk.sh && \
-        ./ci/do_ci.sh bazel.with_abseil'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/setup_thrift.sh dependencies_only && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo ./ci/do_ci.sh bazel.with_abseil'
   cmake_bazel_valgrind_test:
     name: bazel valgrind test
     runs-on: ubuntu-latest
@@ -123,13 +123,13 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget sudo && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-        ./ci/setup_thrift.sh dependencies_only && \
-        ./ci/install_bazelisk.sh && \
-        ./ci/do_ci.sh bazel.valgrind'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/setup_thrift.sh dependencies_only && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo ./ci/do_ci.sh bazel.valgrind'
   cmake_bazel_noexcept_test:
     name: bazel noexcept test
     runs-on: ubuntu-latest
@@ -146,11 +146,11 @@ jobs:
         arm64v8/ubuntu:latest \
         bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-        ./ci/setup_thrift.sh dependencies_only && \
-        ./ci/install_bazelisk.sh && \
-        ./ci/do_ci.sh bazel.noexcept'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/setup_thrift.sh dependencies_only && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo ./ci/do_ci.sh bazel.noexcept'
   cmake_bazel_asan_config_test:
     name: bazel asan config test
     runs-on: ubuntu-latest
@@ -165,13 +165,13 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget sudo && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-        ./ci/setup_thrift.sh dependencies_only && \
-        ./ci/install_bazelisk.sh && \
-        ./ci/do_ci.sh bazel.asan'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/setup_thrift.sh dependencies_only && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo ./ci/do_ci.sh bazel.asan'
   cmake_bazel_tsan_config_test:
     name: bazel tsan config test
     runs-on: ubuntu-latest
@@ -186,13 +186,13 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget sudo && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-        ./ci/setup_thrift.sh dependencies_only && \
-        ./ci/install_bazelisk.sh && \
-        ./ci/do_ci.sh bazel.tsan'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/setup_thrift.sh dependencies_only && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo ./ci/do_ci.sh bazel.tsan'
   cmake_Benchmark_test:
     name: Benchmark test
     runs-on: ubuntu-latest
@@ -207,13 +207,13 @@ jobs:
       run: |
         docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
         arm64v8/ubuntu:latest \
-        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget sudo && \
         uname -m && \
-        ./ci/setup_cmake.sh && \
-        ./ci/setup_ci_environment.sh && \
-         ./ci/install_bazelisk.sh && \
-        export BENCHMARK_DIR=/benchmark && \
-        ./ci/do_ci.sh benchmark'
+        sudo ./ci/setup_cmake.sh && \
+        sudo ./ci/setup_ci_environment.sh && \
+        sudo ./ci/install_bazelisk.sh && \
+        sudo export BENCHMARK_DIR=/benchmark && \
+        sudo ./ci/do_ci.sh benchmark'
   cmake_format_test:
     name: format test
     runs-on: ubuntu-latest
@@ -267,6 +267,10 @@ jobs:
         arm64v8/ubuntu:latest \
         bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \
+        wget https://nodejs.org/dist/v16.14.0/node-v16.14.0-linux-arm64.tar.xz && \
+        tar -xf node-v16.14.0-linux-arm64.tar.gz && \
+        export PATH=/node-v16.14.0-linux-arm64/bin:$PATH && \
+        npm --version && \
         npm install -g markdownlint-cli && \
         markdownlint .'
   cmake_misspell_test:
@@ -286,7 +290,7 @@ jobs:
         bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
         uname -m && \
         curl -L -o ./install-misspell.sh https://git.io/misspell && \
-        sh ./install-misspell.sh && \
+        ./install-misspell.sh && \
         ./bin/misspell -error .'
   cmake_gcc_test:
     name: gcc test
