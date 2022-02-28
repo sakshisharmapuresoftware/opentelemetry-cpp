@@ -306,73 +306,73 @@ jobs:
         ./install-misspell.sh && \
         ./bin/misspell -error . && \
         '
-  #cmake_gcc_test:
-  #  name: gcc test
-  #  runs-on: ubuntu-latest
-  #  steps:
-  #  - uses: actions/checkout@v2
-  #    with:
-  #      submodules: 'recursive'
-  #  - name: Set up QEMU
-  #    id: qemu
-  #    uses: docker/setup-qemu-action@v1
-  #  - name: Install and Run tests
-  #    run: |
-  #      docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
-  #      arm64v8/ubuntu:latest \
-  #      bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
-  #      uname -m && \
-  #      ./ci/setup_ci_environment.sh && \
-  #      ./ci/install_gcc48.sh && \
-  #      CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_cmake.sh && \
-  #      export CC= /usr/bin/gcc-4.8 && \
-  #      export CXX=/usr/bin/g++-4.8 && \
-  #      ./ci/do_ci.sh cmake.legacy.test && \
-  #      '
- # cmake_gcc_otlp_test:
- #   name: gcc otlp test
- #   runs-on: ubuntu-latest
- #   steps:
- #   - uses: actions/checkout@v2
- #     with:
- #       submodules: 'recursive'
- #   - name: Set up QEMU
- #     id: qemu
- #     uses: docker/setup-qemu-action@v1
- #   - name: Install and Run tests
- #     run: |
- #       docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
- #       arm64v8/ubuntu:latest \
- #       bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
- #       uname -m && \
- #       ./ci/setup_ci_environment.sh && \
- #       ./ci/install_gcc48.sh && \
- #       CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_cmake.sh && \
- #       export CC= /usr/bin/gcc-4.8 && \
- #       export CXX=/usr/bin/g++-4.8 && \
- #       ./ci/do_ci.sh cmake.legacy.exporter.otprotocol.test && \
- #       '
- # cmake_otlp_exporter_test:
- #   name: gcc otlp exporter test
- #   runs-on: ubuntu-latest
- #   steps:
- #   - uses: actions/checkout@v2
- #     with:
- #       submodules: 'recursive'
- #   - name: Set up QEMU
- #     id: qemu
- #     uses: docker/setup-qemu-action@v1
- #   - name: Install and Run tests
- #     run: |
- #       docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
- #       arm64v8/ubuntu:latest \
- #       bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
- #       uname -m && \
- #       ./ci/setup_cmake.sh && \
- #       ./ci/setup_ci_environment.sh && \
- #       ./ci/setup_thrift.sh && \
- #       ./ci/do_ci.sh cmake.test && \
- #       '
+  cmake_gcc_test:
+    name: gcc test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        uname -m && \
+        ./ci/setup_ci_environment.sh && \
+        ./ci/install_gcc48.sh && \
+        CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_cmake.sh && \
+        export CC= /usr/bin/gcc-4.8 && \
+        export CXX=/usr/bin/g++-4.8 && \
+        ./ci/do_ci.sh cmake.legacy.test && \
+        '
+  cmake_gcc_otlp_test:
+    name: gcc otlp test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        uname -m && \
+        ./ci/setup_ci_environment.sh && \
+        ./ci/install_gcc48.sh && \
+        CC=/usr/bin/gcc-4.8 CXX=/usr/bin/g++-4.8 ./ci/setup_cmake.sh && \
+        export CC= /usr/bin/gcc-4.8 && \
+        export CXX=/usr/bin/g++-4.8 && \
+        ./ci/do_ci.sh cmake.legacy.exporter.otprotocol.test && \
+        '
+  cmake_otlp_exporter_test:
+    name: gcc otlp exporter test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        submodules: 'recursive'
+    - name: Set up QEMU
+      id: qemu
+      uses: docker/setup-qemu-action@v1
+    - name: Install and Run tests
+      run: |
+        docker run --rm -v ${{ github.workspace }}:/ws:rw --workdir=/ws \
+        arm64v8/ubuntu:latest \
+        bash -exc 'apt-get update && apt-get -y install python3 python3-pip curl wget && \
+        uname -m && \
+        ./ci/setup_cmake.sh && \
+        ./ci/setup_ci_environment.sh && \
+        ./ci/setup_thrift.sh && \
+        ./ci/do_ci.sh cmake.test && \
+        '
   cmake_absel_stl_test:
     name: gcc absel stl test
     runs-on: ubuntu-latest
